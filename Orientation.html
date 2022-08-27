@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Orientation - BMC Helix Innovation Studio master</title>
+
+    
+    <link rel="stylesheet" href="assets/css/expand-macro.css">
+
+            <meta name="scroll-content-language-key" content="">
+    
+    <meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.scrollTo.min.js"></script>
+
+
+<script type="text/javascript" src="assets/js/translate.js"></script>
+
+
+<script type="text/javascript" src="assets/js/scroll-tree.js"></script>
+
+<script type="text/javascript" src="assets/js/theme.main.js"></script>
+
+    <script type="text/javascript" src="assets/js/iframeResizer.min.js"></script>
+
+<link rel="stylesheet" href="assets/css/content-style.css">
+    <link rel="stylesheet" href="assets/css/search.css">
+
+<link rel="stylesheet" href="assets/css/theme.main.css">
+<link rel="stylesheet" href="assets/css/theme.colors.css">
+
+            <!-- ES5 support for older browsers, needed by lunr -->
+        <script src="js/augment.js"></script>
+        <script id="worker" type="javascript/worker">
+
+        startIndex = function() {
+            idx = lunr.Index.load(lunrIndex);
+            idx.pipeline.remove(lunr.stopWordFilter);
+            postMessage({type: "setup-complete"});
+        }
+
+        onmessage = function (event) {
+            var message = event.data;
+
+            if ((message.type === 'setup') && message.baseUrl) {
+                var url = message.baseUrl;
+                importScripts(url + 'js/lunr.js');
+                importScripts(url + 'js/lunr-extras.js');
+                importScripts(url + 'js/lunr-index.js');
+                importScripts(url + 'js/lunr-data.js');
+                startIndex();
+            }
+
+            if (idx && (message.type === 'search-request') && message.query) {
+                var searchWord = message.query;
+                var results = idx.search(searchWord).map(function (result) {
+                    return lunrData.filter(function (d) {
+                        return d.id === parseInt(result.ref, 10)
+                    })[0]
+                });
+                postMessage({type: 'search-results', results: results, query: searchWord, queryId: message.queryId});
+            }
+        }
+
+    </script>
+    </head>
+
+<body pageid="1011457741">
+
+<div id="ht-loader">
+    <noscript>
+        <p style="width: 100%; text-align:center; position: absolute; margin-top: 200px;">This content cannot be displayed without JavaScript.<br>Please enable JavaScript and reload the page.</p>
+    </noscript>
+</div>
+
+<div>
+   	<header id="ht-headerbar">
+    <div class="ht-headerbar-left">
+        <a href="" id="ht-menu-toggle" class="sp-aui-icon-small sp-aui-iconfont-appswitcher"></a>
+    </div>
+    <div class="ht-headerbar-right">
+            <div class="sp-aui-icon-small ht-search-index-loader ht-header-icon"></div>
+
+        <div id="ht-search">
+            <div class="ht-search-input" style="display: none;">
+              	<a href="#" class="sp-aui-icon-small sp-aui-iconfont-remove ht-search-clear"></a>
+
+                <form action="#" method="GET" id="search">
+                    <input class="search-input" type="text" placeholder="Search" tabindex="-1" autocomplete="off" name="q" value="">
+                    <input type="hidden" name="max" value="15" />
+                    <input type="submit" style="display:none" tabindex="-4"/>
+                </form>
+
+                <a href="#" id="ht-search-button" class="ht-header-icon ht-header-icon-svg">
+                                        <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <path d="M29.572,28.802 L28.801,29.571 C28.515,29.857 28.187,30 27.816,30 C27.445,30 27.116,29.857 26.831,29.571 L21.392,24.134 C20.193,24.762 18.908,25.076 17.538,25.076 C15.396,25.076 13.605,24.348 12.163,22.892 C10.721,21.436 10,19.651 10,17.538 C10,15.397 10.721,13.605 12.163,12.163 C13.605,10.721 15.396,10 17.538,10 C19.651,10 21.434,10.721 22.89,12.163 C24.347,13.605 25.075,15.397 25.075,17.538 C25.075,18.937 24.761,20.222 24.132,21.393 L29.572,26.832 C29.857,27.118 30,27.446 30,27.817 C30,28.188 29.857,28.517 29.572,28.802 L29.572,28.802 Z M13.662,21.414 C14.732,22.485 16.024,23.02 17.538,23.02 C19.051,23.02 20.343,22.485 21.413,21.414 C22.484,20.344 23.019,19.052 23.019,17.538 C23.019,16.025 22.484,14.733 21.413,13.662 C20.343,12.592 19.051,12.056 17.538,12.056 C16.024,12.056 14.732,12.592 13.662,13.662 C12.591,14.733 12.056,16.025 12.056,17.538 C12.056,19.052 12.591,20.344 13.662,21.414 L13.662,21.414 Z"></path>
+                        </g>
+                    </svg>
+              	</a>
+
+                <div class="ht-search-dropdown ht-dropdown">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>   	<aside id="ht-sidebar">
+    <div class="ht-sidebar-content">
+        <div class="ht-sidebar-content-scroll-container">
+            <header class="ht-sidebar-header">
+                <h1 class="ht-logo">
+                    <span class="ht-logo-label">ismasterspace</span>
+                    <img class="space-logo" src="default-space-logo.svg" />
+                </h1>
+                <a href="Orientation.html" class="ht-space-link">
+                    <h2>BMC Helix Innovation Studio master</h2>
+                </a>
+            </header>
+                            <iframe id="ht-nav" src="toc.html?pageId=1011457741"></iframe>
+                <script>
+                    $('iframe#ht-nav').iFrameResize(
+                            { 'log': true, 'autoResize': true, 'heightCalculationMethod': 'lowestElement', 'checkOrigin': false });
+                </script>
+                    </div>
+    </div>
+
+</aside></div>
+
+<div id="ht-wrap-container">
+
+            
+    <div id="ht-sidebar-dragbar">
+    <div class="ht-sidebar-drag-handle">
+        <span class="drag-handle-1"></span>
+        <span class="drag-handle-2"></span>
+        <span class="drag-handle-3"></span>
+    </div>
+</div>
+    <article id="ht-content" class="ht-content">
+        <header class="ht-content-header">
+            <div id="ht-breadcrumb">
+    <ul>
+        <li><a href="Orientation.html">BMC Helix Innovation Studio master</a></li>
+                                        </ul>
+</div>            <h1 id="src-1011457741"> <span>Orientation</span></h1>
+        </header>
+
+        <div id="main-content" class="wiki-content sp-grid-section" data-index-for-search="true">
+
+<p   
+></p>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Quickoverview" class="heading "><span>Quick overview</span></h3>
+<p   
+>BMC Helix Innovation Studio helps you to build your own applications with the help of different designer consoles, deploy them for the end users of these applications, and manage or configure them. BMC Helix Innovation Studio helps you establish data requirements, expose fields for your user interface, and implement complex powerful business processes.</p>
+<p   
+>BMC Helix Innovation Studio is based on a Model View Controller pattern, which helps you to separate database tables, business logic, and user interface. You can upload the applications and libraries developed in BMC Helix Innovation Studio in a central repository, called Marketplace, from where other developers can download them for reuse.</p>
+<p   
+>BMC Helix Innovation Studio provides the following features to create applications and libraries:<ul class=" "><li class=" "><p   
+>Solutions for your business needs</p>
+</li><li class=" "><p   
+>Solves problem without substantial code changes</p>
+</li><li class=" "><p   
+>Applies new technology to products to enhance your products</p>
+</li><li class=" "><p   
+>Integrates with other applications</p>
+</li><li class=" "><p   
+>Creates shareable code extensions</p>
+</li></ul></p>
+<hr>
+<p   
+></p>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Productroles" class="heading "><span>Product roles</span></h3>
+<p   
+>Individuals who need to access     <span style="color: #000000;">
+BMC Helix Innovation Suite    </span>
+ are registered as users by an administrator. The administrator then assigns the users to access control groups. The control group members can assign users to groups and then associate the groups with roles.</p>
+<p   
+>The following table provides details about the roles:    <div  class="tablewrap">
+        <table class="confluenceTable">
+                    <colgroup>
+                                    <col  width="321.0"/>
+                                    <col  width="719.0"/>
+                            </colgroup>
+        <thead class=" ">    <tr>
+            <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Action</p>
+            </td>
+                <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Reference</p>
+            </td>
+        </tr>
+</thead><tfoot class=" "></tfoot><tbody class=" ">    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Learn about AR System roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Role-based+access+overview">Role-based access overview</a></p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p  class="auto-cursor-target" 
+>Learn about BMC Helix ITSM roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/brid2105/Roles+and+permissions">Roles and permissions</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+in     <span style="color: #000000;">
+BMC Helix Innovation Suite    </span>
+ Deployment documentation.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Learn about BMC BMC Helix ITSM Insights roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/itsminsights2105/Roles+and+permissions">Roles and permissions</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+in BMC Helix ITSM Insights documentation.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Learn about BMC Helix Innovation Studio roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Roles+and+permissions">Roles and permissions</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+in BMC Helix Innovation Studio documentation.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Learn about BMC Live Chat roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/helixva2105/Roles+and+permissions">Roles and permissions</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+in BMC Live Chat documentation.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Learn about     <span style="color: #333333;">
+BMC Helix Multi-Cloud Broker    </span>
+ roles</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/multicloud/Assigning+roles+and+permissions">Assigning roles and permissions</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+in     <span style="color: #333333;">
+BMC Helix Multi-Cloud Broker    </span>
+ documentation.</p>
+            </td>
+        </tr>
+</tbody>        </table>
+            </div>
+</p>
+<p   
+></p>
+<hr>
+<p   
+></p>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Productcomponents" class="heading "><span>Product components</span></h3>
+<p   
+>    <span style="color: #000000;">
+BMC Helix Innovation Suite    </span>
+ includes the following components that help you achieve specific goals:    <div  class="tablewrap">
+        <table class="relative-table confluenceTable">
+                    <colgroup>
+                                    <col  width="11.1111%"/>
+                                    <col  width="88.8889%"/>
+                            </colgroup>
+        <thead class=" ">    <tr>
+            <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Component name</p>
+            </td>
+                <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Description</p>
+            </td>
+        </tr>
+</thead><tfoot class=" "></tfoot><tbody class=" ">    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Configuring+AR+System+servers">AR System Server</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>The     <span style="color: #000000;">
+AR System server    </span>
+ is the primary feature that manages user interaction with the underlying database. Install the     <span style="color: #000000;">
+AR System server    </span>
+on UNIX, Linux, or Microsoft Windows system.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Configuring+the+mid+tier">Mid Tier</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Mid Tier is middleware that enables you to access AR System access through a browser. InstallMid Tier on a UNIX, Linux, or Windows system.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Enabling+approvals+in+requests">Approval Server</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>    <span style="color: #333333;">
+The Approval Server is a self-contained, shared module that can be attached to any AR System application.    </span>
+</p>
+<p   
+>Approval Server brings a flexible approach to automating approval processes for any organization.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Enabling+automatic+request+assignment">Assignment Engine</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>    <span style="color: #333333;">
+The     <span style="color: #000000;">
+Assignment Engine    </span>
+, installed with AR System enables you to use processes instead of workflow to automatically assign requests to individuals.    </span>
+</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Enabling+email+requests+and+notifications">Email Engine</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>The Email Engine allows you to access AR System through an email client and to receive email notifications.</p>
+<p   
+>The Email Engine transforms email messages into an interface to the     <span style="color: #000000;">
+AR System server    </span>
+. The Email Engine enables users to instruct the     <span style="color: #000000;">
+AR System server    </span>
+ to perform queries, submissions, or modifications to entries, all by using email.</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Accessing+and+navigating+Developer+Studio">Developer Studio</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>    <span style="color: #333333;">
+Developer Studio is an integrated development environment (IDE) for AR System applications.    </span>
+</p>
+<p   
+>    <span style="color: #333333;">
+It provides all application development functions needed to design an application.    </span>
+</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Navigating+BMC+Helix+Innovation+Studio">BMC Helix Innovation Studio</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>BMC Helix Innovation Studio is a graphical user interface used to develop and tailor applications or libraries. You can use the designer tabs in BMC Helix Innovation Studio to create views, records, and business logic for an application or a library.</p>
+            </td>
+        </tr>
+</tbody>        </table>
+            </div>
+</p>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Productkeyfeatures" class="heading "><span>Product key features</span></h3>
+<p   
+>The following table lists key features that you can use when developing or customizing an application:    <div  class="tablewrap">
+        <table class="relative-table confluenceTable">
+                    <colgroup>
+                                    <col  width="51.2629%"/>
+                                    <col  width="48.4472%"/>
+                                    <col  width="0.248447%"/>
+                            </colgroup>
+        <thead class=" ">    <tr>
+            <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Key features</p>
+            </td>
+                <td  class="confluenceTh" rowspan="1" colspan="1">
+    <p   
+>Description</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+</thead><tfoot class=" "></tfoot><tbody class=" ">    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Onboarding+and+implementing">Foundation module</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>The Foundation module is installed along with     <span style="color: #000000;">
+BMC Helix ITSM    </span>
+ applications.     <span style="color: #000000;">
+BMC Helix ITSM    </span>
+ applications use the Foundation module to manage common data structures used by all applications.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Creating+interactive+dashboards+for+your+applications+by+using+BMC+Helix+Dashboards">Common reporting mechanism for Remedy and BMC Helix Innovation Studio applications</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>BMC Helix Dashboards is a SaaS service on the BMC Helix Portal that provides the ability to create interactive dashboards for the applications in your environment.</p>
+<p   
+>BMC Helix Dashboards uses the Service Management plug-in to create and view reports for service management applications.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="highlight-blue confluenceTh" rowspan="1" colspan="3">
+    <p   
+>Capabilities of Developer Studio</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Developing+a+Progressive+Web+Application">Progressive web application (PWA)</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>In Developer Studio, you can enable progressive views for an out-of-the-box form or for a custom form. Using PWA, you can create applications that are flexible and provide a dynamic, modern user experience.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Enabling+full+text+search">Full-text search (FTS)</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Use the Full Text Search (FTS) o    <span style="color: #202124;">
+ption to index character, diary, and attachment fields for searching. The FTSoption matches entries from fields against the search criteria that you specify.    </span>
+</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Calling+third-party+REST+APIs+in+a+Remedy+application">Calling third-party REST API in an application</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>    <span style="color: #000000;">
+As a developer, you can call third-party REST APIs to update the     <span style="color: #000000;">
+BMC Helix ITSM    </span>
+ application by creating a filter inDeveloper Studio    </span>
+    <span style="color: #000000;">
+.    </span>
+</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Adding+AR+System+webhook+to+receive+automatic+notifications">Adding AR System webhook to receive automatic notifications</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>You can use AR System REST API to register a webhook definition. Use the webhook to send real-time event notifications to external systems from the     <span style="color: #000000;">
+AR System server    </span>
+. The webhook definition eliminates the manual effort required to create workflows and removes the need for continuous server polling.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/ars2105/Defining+and+deploying+data+and+object+packages">Remedy Deployment Application</a></p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>The Deployment Application provides a single method for promoting definitions and data effectively and reliably across environments.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="highlight-blue confluenceTh" rowspan="1" colspan="3">
+    <p   
+>Capabilities of BMC Helix Innovation Studio</p>
+            </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Developing+codeless+applications">Developing codeless applications</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>You can develop codeless and code-based applications by using BMC Helix Innovation Studio:</p>
+<ul class=" "><li class=" "><p   
+>Administrators can develop codeless applications by using BMC Helix Innovation Studio. Development of codeless applications requires minimal programming knowledge or dependency on developers.</p>
+</li><li class=" "><p   
+>Administrators can develop code-based applications by using the BMC Helix Innovation Studio SDK, BMC Helix Innovation Studio, and Maven archetypes.</p>
+</li></ul>            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Tailoring+the+application+skin+and+brand">Tailoring the application skin and brand</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Use BMC Helix Innovation Studio to create definitions (data, user interface, and business logic) required for applications by using the various available designers.</p>
+<p   
+>Customize the application by modifying definitions of the application by using BMC Helix Innovation Studio.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Adding+cognitive+capabilities+to+a+custom+application">Adding cognitive capabilities to a custom application</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Configure cognitive service use the advantages of Artificial Intelligence (AI) and Machine Learning (ML) in your applications.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Enabling+cognitive+search+in+an+application">Enabling cognitive search in an application</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Configure cognitive search as an alternative to Full Text Search (FTS).</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+    <tr>
+            <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+><a   href="https://docs.bmc.com/docs/display/is2105/Enabling+cognitive+service+summaries+for+custom+applications">Enabling cognitive service summaries for custom applications</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+            </td>
+                <td  class="confluenceTd" rowspan="1" colspan="1">
+    <p   
+>Configure cognitive summarization service that enables the administrator to use the advantages of Natural Language Processing and Machine Learning in your applications to summarize the text.</p>
+            </td>
+                <td   rowspan="1" colspan="1">
+                </td>
+        </tr>
+</tbody>        </table>
+            </div>
+</p>
+<p   
+></p>
+<hr>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Productdocumentation" class="heading "><span>Product documentation</span></h3>
+<p   
+>The BMC Helix Innovation Studio documentation helps new and experienced users implement or use this product. Based on your role, the following sections of the documentation are recommended:</p>
+<p   
+><img  class="confluence-embedded-image"  src="images/docs/download/attachments/765455250/2102_Product_documentation.png" alt="images/docs/download/attachments/765455250/2102_Product_documentation.png" width="900"  />
+    </p>
+<hr>
+    <h3 id="src-1011457741_id-.Orientationv21.05-user_assistanceUserassistance" class="heading "><span>User assistance </span></h3>
+<p   
+>A number of channels are available through which the developer community can get support.<ul class=" "><li class=" "><p   
+>You can log on to <a  class="external-link" href="https://community.bmc.com/s/group/0F93n000000Plr8CAC/developer-community">BMC Developer community</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+to get support from other developers by using <a  class="external-link" href="https://developers.bmc.com/site/global/home/index.gsp">Developer portal</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+. Experts from BMC can help you out with your queries.</p>
+</li><li class=" "><p   
+>You can look at <a  class="external-link" href="https://developers.bmc.com/site/global/home/index.gsp">Developer portal</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+to collaborate with like-minded developers. You can co-create, innovate, and <a   href="https://docs.bmc.com/docs/display/ismasterspace/.Developing+and+deploying+code-based+applications+v21.02">create applications</a>.</p>
+</li><li class=" "><p   
+><a   href="https://docs.bmc.com/docs/display/ismasterspace/.Tutorial+v17.11">Access the tutorial</a> to create a sample application.</p>
+</li></ul></p>
+<p   
+>If you are a Remedy developer, you can review the <a   href="https://docs.bmc.com/docs/display/ismasterspace/.Comparison+between+Developer+Studio+and+BMC+Helix+Innovation+Studio+capabilities+v19.05">Comparison between Developer Studio and BMC Helix Innovation Studio capabilities</a> constructs.</p>
+<p   
+>Within BMC Helix Innovation Studio, you can use tool-tips to get in-place assistance for populating fields, you can use the     <span style="color: #000000;">
+guided tours created for key use cases by using the Self-help widget    </span>
+, or you can take a tutorial that takes you through building an application process.</p>
+<p   
+>The following video (2:47) provides an overview of accessing the self-help within BMC Helix Innovation Studio:</p>
+<p   
+><br/></p>
+<p  class="auto-cursor-target" 
+><br/><img  class="confluence-embedded-image confluence-thumbnail"  src="images/docs/download/thumbnails/765455250/icon_play.png" alt="images/docs/download/thumbnails/765455250/icon_play.png"  height="14" />
+ <a  class="external-link" href="https://youtu.be/xnJES8-CwkQ">https://youtu.be/xnJES8-CwkQ</a></p>
+    <h3 id="src-1011457741_id-.Orientationv21.05-Recommendedskillsset" class="heading "><span>Recommended skills set </span></h3>
+    <h4 id="src-1011457741_id-.Orientationv21.05-Foranadministrator" class="heading "><span>For an administrator</span></h4>
+<p   
+>An administrator can create codeless applications with minimal programming knowledge.</p>
+    <h4 id="src-1011457741_id-.Orientationv21.05-Foradeveloper" class="heading "><span>For a developer</span></h4>
+<p   
+>For a developer to be able to work smoothly with BMC Helix Innovation Studio and codes, the following skills set is recommended.<ul class=" "><li class=" "><p   
+>Maven</p>
+<ul class="_mce_tagged_br "><li class=" "><p   
+><a  class="external-link" href="http://maven.apache.org/">http://maven.apache.org/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li></ul></li><li class=" "><p   
+>Angular</p>
+<ul class=" "><li class=" "><p   
+><a  class="external-link" href="http://angularbootcamp.com/">http://angularbootcamp.com/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="https://www.udemy.com/quickstart-angularjs/">https://www.udemy.com/quickstart-angularjs/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="https://www.udemy.com/angularjs-jumpstart/">https://www.udemy.com/angularjs-jumpstart/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="https://www.udemy.com/angularjs-custom-directives/">https://www.udemy.com/angularjs-custom-directives/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li></ul></li><li class=" "><p   
+>Server side application development</p>
+</li><li class=" "><p   
+>Prerequisites:</p>
+<ul class=" "><li class=" "><p   
+><i class=" ">(required)</i> Oracle University Java SE 8 Fundamentals (required)</p>
+</li><li class=" "><p   
+><i class=" ">(recommended)</i> Oracle University Java SE 8 Programming</p>
+</li><li class=" "><p   
+>Read Building RESTful Web Services with JAX-RS tutorial</p>
+</li><li class=" "><p   
+><a  class="external-link" href="http://education.oracle.com/pls/web_prod-plq-dad/ou_product_category.getPage?p_cat_id=267">http://education.oracle.com/pls/web_prod-plq-dad/ou_product_category.getPage?p_cat_id=267</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html">http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li></ul></li><li class=" "><p   
+>Client side application development</p>
+</li><li class=" "><p   
+>Prerequisites:</p>
+<ul class=" "><li class=" "><p   
+><i class=" ">(required)</i> Oracle University JavaScript and HTML5: Develop Web Applications</p>
+</li><li class=" "><p   
+><i class=" ">(required) </i>Read online tutorial of JSON</p>
+</li><li class=" "><p   
+><a  class="external-link" href="http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=609&amp;get_params=dc:D84842,clang:EN">http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=609&amp;get_params=dc:D84842,clang:EN </a><img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="https://www.w3schools.com/js/js_json_intro.asp">https://www.w3schools.com/js/js_json_intro.asp</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li></ul></li></ul></p>
+<p   
+><br/>    <div  class="confbox panel">
+            <div class="title panel-header">Video</div>
+            <div class="panel-content">
+<p   
+>The following video gives you information on developing applications:</p>
+<p   
+><br/><br/><img  class="confluence-embedded-image"  src="images/docs/download/attachments/1011457741/icon-play.png" alt="images/docs/download/attachments/1011457741/icon-play.png"   />
+<a  class="external-link" href="https://youtu.be/N8ew_BwdbPY">https://youtu.be/N8ew_BwdbPY</a></p>
+        </div>
+    </div>
+</p>
+<hr>
+    <h3 id="src-1011457741_id-.Orientationv21.05-recommended_trainingRecommendedtraining" class="heading "><span>Recommended training</span></h3>
+<p   style="text-align:left;"
+>Before you start creating applications, BMC recommends the following trainings:    <span style="color: #000000;">
+    <span style="color: #000000;">
+    <span style="color: #000000;">
+    </span>
+    </span>
+    </span>
+<ul class=" "><li class=" "><p   
+>    <span style="color: #000000;">
+    <span style="color: #000000;">
+    <span style="color: #000000;">
+<a  class="external-link" href="https://www.udemy.com/quickstart-angularjs/">https://www.udemy.com/quickstart-angularjs/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+    </span>
+    </span>
+    </span>
+</p>
+</li><li class=" "><p   
+>    <span style="color: #000000;">
+<a  class="external-link" href="https://www.udemy.com/angularjs-jumpstart/">https://www.udemy.com/angularjs-jumpstart/</a> <img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+    </span>
+</p>
+</li><li class=" "><p   
+><a  class="external-link" href="https://www.udemy.com/angularjs-custom-directives/">https://www.udemy.com/angularjs-custom-directives/ </a><img    src="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" alt="images/inline/f0d040377689a13ca2c7eca8f4ac1779373c05df.png" width="11"  />
+</p>
+</li></ul></p>
+        </div>
+
+    </article>
+
+
+            <nav id="ht-post-nav">
+            </nav>    
+            
+    <footer id="ht-footer">
+    <a href="#" id="ht-jump-top" class="sp-aui-icon-small sp-aui-iconfont-arrows-up"></a>
+</footer></div>
+
+<div>
+    <div id="ht-mq-detect"></div>
+</div>
+
+    <script src="js/lunr.js"></script>
+    <script src="js/lunr-extras.js"></script>
+    <script src="assets/js/scroll-search.js"></script>
+
+    <script src="assets/js/expand-macro.js"></script>
+</body>
+</html>
